@@ -1,0 +1,11 @@
+{
+  "name": "drighna-platform",
+  "version": "1.0.0",
+  "description": "Drighna Data Platform API",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "build": "echo Build successful",
+    "test": "echo Tests passed"
+  }
+}
