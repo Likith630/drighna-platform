@@ -1,33 +1,45 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs 'Node-20'
+    environment {
+        DOCKER_IMAGE = "likith630/drighna-platform"
     }
 
     stages {
 
+        stage('Clone Code') {
+            steps {
+                git 'https://github.com/likith630/drighna-platform.git'
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'npm run build'
+                bat 'npm run build'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'npm test'
+                bat 'npm test'
             }
         }
 
-        stage('Run App') {
+        stage('Build Docker Image') {
             steps {
-                sh 'node src/app.js &'
+                bat "docker build -t %DOCKER_IMAGE% ."
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                bat "docker push %DOCKER_IMAGE%"
             }
         }
     }
