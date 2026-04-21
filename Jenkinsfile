@@ -7,12 +7,6 @@ pipeline {
 
     stages {
 
-        stage('Clone Code') {
-            steps {
-                git 'https://github.com/likith630/drighna-platform.git'
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 bat 'npm install'
